@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: API Gateway
+  cloud:    gateway:      discovery:        locator:          enabled: true
+      routes:
+        - id: first microservice
+          uri: lb://microservice-one
+          predicates:
+            - Path=/first/**
+        - id: second microservice
+          uri: lb://microservice-two
+          predicates:
+            - Path=/second/**
+         
+server:  port: 8765
+eureka:
+  client:
+    service-url:      defaultZone: http://localhost:8761/eureka
